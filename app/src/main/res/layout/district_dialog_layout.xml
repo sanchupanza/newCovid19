@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:id="@+id/resetlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp">
+
+
+        <TextView
+            android:id="@+id/tv_district_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/pink"
+            android:layout_marginBottom="5dp">
+        </TextView>
+
+      <LinearLayout
+          android:layout_marginTop="5dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:weightSum="2">
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:textSize="18sp"
+              android:layout_weight="1"
+              android:text="District Name"
+              android:textStyle="bold"
+              android:textColor="@color/black"
+              android:layout_marginBottom="5dp">
+          </TextView>
+
+          <TextView
+              android:gravity="right"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:layout_marginBottom="5dp"
+              android:text="Confirmed"
+              android:textColor="@color/black"
+              android:textSize="18sp"
+              android:layout_weight="1"
+              android:textStyle="bold">
+
+          </TextView>
+      </LinearLayout>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_districtList"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/single_district_layout"
+            android:layout_height="400dp"
+            android:layout_marginBottom="5dp"
+            />
+
+
+    </LinearLayout>
+</LinearLayout>
