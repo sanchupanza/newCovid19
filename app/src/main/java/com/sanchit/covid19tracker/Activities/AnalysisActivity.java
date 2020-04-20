@@ -110,7 +110,7 @@ public class AnalysisActivity extends AppCompatActivity {
                         String death = (String.valueOf(response.body().getStatewise().get(0).getDeaths()));
 
                         setPieData(confirmed,active,recovered,death);
-                        
+
                         List<Statewise> statewiseList = response.body().getStatewise();
                         setStatesData(statewiseList);
 
