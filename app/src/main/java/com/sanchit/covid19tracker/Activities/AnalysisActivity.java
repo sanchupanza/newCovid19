@@ -230,8 +230,9 @@ public class AnalysisActivity extends AppCompatActivity {
         binding.barGraph.setMinimumWidth(5000);*/
         binding.barGraph.setTouchEnabled(true);
         binding.barGraph.setDragEnabled(true);
-        binding.barGraph.setDrawBorders(true);
-
+        binding.barGraph.setDrawBorders(false);
+        binding.barGraph.animateX(1000);
+        binding.barGraph.setLeftTopRightBottom(20,20,20,20);
         binding.barGraph.getAxisRight().setDrawGridLines(false);
         binding.barGraph.getAxisLeft().setDrawGridLines(false);
         binding.barGraph.getXAxis().setDrawGridLines(false);

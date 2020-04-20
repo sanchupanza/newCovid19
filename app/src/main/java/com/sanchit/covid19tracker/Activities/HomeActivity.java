@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.eftimoff.androidplayer.Player;
 import com.eftimoff.androidplayer.actions.property.PropertyAction;
+import com.sanchit.covid19tracker.Adapters.TestActivity;
 import com.sanchit.covid19tracker.Adapters.UpdateAdapter;
 import com.sanchit.covid19tracker.Network.SoleInstance;
 import com.sanchit.covid19tracker.Network.WorldSoleInstance;
@@ -54,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        context = this;
         Window window = this.getWindow();
 
 // clear FLAG_TRANSLUCENT_STATUS flag:
@@ -86,6 +87,9 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        binding.btnInformation.setOnClickListener(view -> startActivity(new Intent(context,TestActivity.class)));
 
 
     }
