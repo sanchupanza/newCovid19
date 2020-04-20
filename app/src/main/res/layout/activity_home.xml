@@ -5,7 +5,7 @@
     tools:context=".Activities.HomeActivity">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -15,10 +15,10 @@
             android:id="@+id/iamge1"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/logobanner_rect">
+            android:background="@drawable/logobanner_rect"
+            app:layout_constraintBottom_toTopOf="@+id/iamge2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="10dp">
 
             <ImageView
                 android:id="@+id/imageView7"
@@ -92,7 +92,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginBottom="30dp"
-                android:text="10000000"
                 android:textColor="#CA555D"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -107,8 +106,8 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@drawable/secondcard"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp">
+            app:layout_constraintBottom_toTopOf="@+id/iamge3"
+            app:layout_constraintTop_toBottomOf="@+id/iamge1">
 
 
             <LinearLayout
@@ -134,13 +133,13 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/btn_take_test"
-                    android:text="Take Test"
-                    android:textColor="#fff"
-                    android:gravity="center"
-                    android:textSize="12sp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
+                    android:background="@drawable/btn_take_test"
+                    android:gravity="center"
+                    android:text="Take Test"
+                    android:textColor="#fff"
+                    android:textSize="12sp"
                     android:textStyle="bold">
 
                 </TextView>
@@ -153,10 +152,10 @@
             android:id="@+id/iamge3"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:orientation="horizontal"
-            android:weightSum="4">
+            android:weightSum="4"
+            app:layout_constraintBottom_toTopOf="@+id/iamge4"
+            app:layout_constraintTop_toBottomOf="@+id/iamge2">
 
             <Button
                 android:id="@+id/btn_covid_resources"
@@ -175,6 +174,7 @@
                 android:background="@drawable/btn_stats_analysis">
 
             </Button>
+
             <Button
                 android:id="@+id/btn_information"
                 android:layout_width="0dp"
@@ -183,6 +183,7 @@
                 android:background="@drawable/btn_information">
 
             </Button>
+
             <Button
                 android:id="@+id/btn_emergency_contacts"
                 android:layout_width="0dp"
@@ -193,28 +194,26 @@
             </Button>
 
 
-
-
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/iamge4"
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:background="@drawable/fourthcard"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iamge3">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
                 android:text="Live Updates"
                 android:textColor="@color/pink"
-                android:gravity="center"
                 android:textSize="18sp"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="20dp"
                 android:textStyle="bold">
 
             </TextView>
@@ -225,15 +224,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="18dp"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginRight="15dp">
+                android:nestedScrollingEnabled="false">
 
             </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

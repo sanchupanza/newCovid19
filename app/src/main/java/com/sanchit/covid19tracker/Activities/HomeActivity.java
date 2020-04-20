@@ -1,4 +1,4 @@
-package com.sanchit.covid19tracker;
+package com.sanchit.covid19tracker.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -7,9 +7,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -25,6 +27,7 @@ import com.eftimoff.androidplayer.actions.property.PropertyAction;
 import com.sanchit.covid19tracker.Adapters.UpdateAdapter;
 import com.sanchit.covid19tracker.Network.SoleInstance;
 import com.sanchit.covid19tracker.Network.WorldSoleInstance;
+import com.sanchit.covid19tracker.R;
 import com.sanchit.covid19tracker.Response.Countries.CountriesResponse;
 import com.sanchit.covid19tracker.Response.Updates.UpdatesResponse;
 import com.sanchit.covid19tracker.Utils.Constants;
@@ -74,6 +77,15 @@ public class HomeActivity extends AppCompatActivity {
         animatesample(binding.iamge1, binding.iamge2, binding.btnCovidResources,binding.btnStatsAnalysis,binding.btnInformation,binding.btnEmergencyContacts, binding.iamge4);
         animation();
         getUpdates();
+
+
+        binding.btnStatsAnalysis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,AnalysisActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

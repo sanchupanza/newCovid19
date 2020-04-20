@@ -1,8 +1,10 @@
-package com.sanchit.covid19tracker;
+package com.sanchit.covid19tracker.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.sanchit.covid19tracker.R;
 
 public class MainActivity extends AppCompatActivity {
 
