@@ -14,4 +14,12 @@
     <color name="status_color">#F0326F</color>
     <color name="bottom_color">#9C36B5</color>
     <color name="white">#fff</color>
+    <color name="dark_red">#FF0000</color>
+    <color name="dark_blue">#225AEE</color>
+    <color name="dark_green">#1F9121</color>
+    <color name="dark_grey">#949C94</color>
+    <color name="background">#001341</color>
+    <color name="new_red">#C56961</color>
+
+
 </resources>
