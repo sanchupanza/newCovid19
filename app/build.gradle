@@ -36,7 +36,8 @@ android {
 }
 
 repositories {
-    maven { url 'https://jitpack.io' }
+    maven {
+        url 'https://jitpack.io'}
 }
 
 dependencies {
@@ -70,6 +71,8 @@ dependencies {
 
     implementation 'com.tbuonomo:creative-viewpager:1.0.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 
 
     // implementation 'joda-time:joda-time:2.10.5'

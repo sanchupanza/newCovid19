@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.eftimoff.androidplayer.Player;
 import com.eftimoff.androidplayer.actions.property.PropertyAction;
 import com.sanchit.covid19tracker.Adapters.TestActivity;
@@ -74,6 +76,7 @@ public class HomeActivity extends AppCompatActivity {
 
     //    Constants.darkenStatusBar(this,R.color.white);
 
+
         getData();
         animatesample(binding.iamge1, binding.iamge2, binding.btnCovidResources,binding.btnStatsAnalysis,binding.btnInformation,binding.btnEmergencyContacts, binding.iamge4);
         animation();
@@ -90,8 +93,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
         binding.btnInformation.setOnClickListener(view -> startActivity(new Intent(context,TestActivity.class)));
-
-
     }
 
     private void getUpdates() {

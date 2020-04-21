@@ -16,20 +16,27 @@ import com.tbuonomo.creativeviewpager.adapter.CreativePagerAdapter;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.w3c.dom.Text;
+
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyCustomAdapter implements CreativePagerAdapter {
 
     private Context context;
+    private List<CustomePojo> customePojoList;
 
-    public MyCustomAdapter(Context context) {
+    public MyCustomAdapter(Context context, List<CustomePojo> customePojoList) {
         this.context = context;
+        this.customePojoList = customePojoList;
     }
 
 
 
     @Override
     public int getCount() {
-        return NatureItem.values().length;
+        return customePojoList.size();
     }
 
 
@@ -39,12 +46,13 @@ public class MyCustomAdapter implements CreativePagerAdapter {
 
         View view = layoutInflater.inflate(R.layout.item_creative_header_profile, viewGroup, false);
 
-        ImageView imageView = (ImageView)view.findViewById(R.id.itemCreativeImage);
+        CircleImageView imageView = (CircleImageView) view.findViewById(R.id.itemCreativeImage);
 
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP)
         {
-            imageView.setImageDrawable(context.getResources().getDrawable(NatureItem.values()[i].getUserDrawable()));
+          //  imageView.setImageDrawable(context.getResources().getDrawable(NatureItem.values()[i].getUserDrawable()));
+            imageView.setImageResource(customePojoList.get(i).user);
         }
 
 
@@ -60,11 +68,16 @@ public class MyCustomAdapter implements CreativePagerAdapter {
 
         View view = layoutInflater.inflate(R.layout.item_creative_content_nature, viewGroup, false);
 
-        ImageView imageView = (ImageView) view.findViewById(R.id.itemCreativeNatureImage);
+     //   ImageView imageView = (ImageView) view.findViewById(R.id.itemCreativeNatureImage);
+
+    //    TextView textView  = (TextView) view.findViewById(R.id.tv_state);
+
+    //    textView.setText(customePojoList.get(i).stateName);
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP)
         {
-            imageView.setImageDrawable(context.getResources().getDrawable(NatureItem.values()[i].getNatureDrawable()));
+         //   imageView.setImageDrawable(context.getResources().getDrawable(NatureItem.values()[i].getNatureDrawable()));
+    //        imageView.setImageResource(customePojoList.get(i).nature);
         }
         return view;
     }
@@ -77,7 +90,8 @@ public class MyCustomAdapter implements CreativePagerAdapter {
     @Nullable
     @Override
     public Bitmap requestBitmapAtPosition(int i) {
-        return BitmapFactory.decodeResource(context.getResources(),NatureItem.values()[i].getNatureDrawable());
+       // return BitmapFactory.decodeResource(context.getResources(),NatureItem.values()[i].getNatureDrawable());
+        return BitmapFactory.decodeResource(context.getResources(),customePojoList.get(i).nature);
 
     }
 }

@@ -23,11 +23,11 @@ class NatureCreativePagerAdapter (val context : Context) : CreativePagerAdapter 
 
         // Bind the views
       //  val title: TextView = headerRoot.findViewById(R.id.itemCreativeNatureTitle)
-        val image: ImageView = headerRoot.findViewById(R.id.itemCreativeNatureImage)
+    //    val image: ImageView = headerRoot.findViewById(R.id.itemCreativeNatureImage)
 
 //        title.text = context.getString(R.string.item_nature_title, position)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            image.setImageDrawable(context.getDrawable(NatureItem.values()[position].natureDrawable))
+    //        image.setImageDrawable(context.getDrawable(NatureItem.values()[position].natureDrawable))
         }
 
         return headerRoot

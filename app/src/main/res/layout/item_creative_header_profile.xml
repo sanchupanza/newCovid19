@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<de.hdodenhof.circleimageview.CircleImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/itemCreativeImage"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:scaleType="centerCrop"
-    app:civ_border_color="#fff"
-    app:civ_border_width="2dp"
-    tools:layout_height="92dp"
-    tools:layout_width="92dp"
-    tools:src="@drawable/user_000">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-</de.hdodenhof.circleimageview.CircleImageView>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/itemCreativeImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:civ_border_color="#fff"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_height="92dp"
+        tools:layout_width="92dp"
+        tools:src="@drawable/user_000">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <TextView
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:text="A"
+        android:id="@+id/tv_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/itemCreativeImage"
+        app:layout_constraintTop_toTopOf="@+id/itemCreativeImage"></TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
