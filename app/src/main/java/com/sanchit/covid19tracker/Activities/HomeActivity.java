@@ -92,7 +92,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-        binding.btnInformation.setOnClickListener(view -> startActivity(new Intent(context,TestActivity.class)));
+
     }
 
     private void getUpdates() {
