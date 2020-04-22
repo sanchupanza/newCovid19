@@ -5,11 +5,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.eftimoff.androidplayer.Player;
@@ -24,6 +27,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.sanchit.covid19tracker.Adapters.TestActivity;
 import com.sanchit.covid19tracker.Network.SoleInstance;
 import com.sanchit.covid19tracker.R;
 import com.sanchit.covid19tracker.Response.AllData.CasesTimeSeries;
@@ -42,6 +46,7 @@ public class AnalysisActivity extends AppCompatActivity {
 
     private ActivityAnalysisBinding binding;
     private Context context;
+    Animation rotateAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,7 @@ public class AnalysisActivity extends AppCompatActivity {
 
 
         animate(binding.constraintLayout2,binding.constraintLayout3,binding.constraintLayout4,binding.clweekanalysis);
+        animation();
 
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +77,17 @@ public class AnalysisActivity extends AppCompatActivity {
                 binding.tvglobal.setBackground(getResources().getDrawable(R.drawable.btn_tab));
                 binding.tvglobal.setTextColor(getResources().getColor(R.color.white));
 
+                binding.constraintLayout2.setVisibility(View.GONE);
+                binding.constraintLayout3.setVisibility(View.GONE);
+                binding.constraintLayout4.setVisibility(View.GONE);
+                binding.clweekanalysis.setVisibility(View.GONE);
+
+                binding.constraintLayout5.setVisibility(View.VISIBLE);
+                binding.constraintLayout6.setVisibility(View.VISIBLE);
+                binding.constraintLayout7.setVisibility(View.VISIBLE);
+
+
+
             }
         });
 
@@ -80,9 +97,27 @@ public class AnalysisActivity extends AppCompatActivity {
             public void onClick(View view) {
                 binding.tvglobal.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                 binding.tvglobal.setTextColor(getResources().getColor(R.color.pink));
-                binding.tvindia.setBackground(getResources().getDrawable(R.drawable.btn_tab));
+                binding.tvindia.setBackground(getResources().getDrawable(R.drawable.btn_tab_blue));
                 binding.tvindia.setTextColor(getResources().getColor(R.color.white));
 
+                binding.constraintLayout5.setVisibility(View.GONE);
+                binding.constraintLayout6.setVisibility(View.GONE);
+                binding.constraintLayout7.setVisibility(View.GONE);
+
+                binding.constraintLayout2.setVisibility(View.VISIBLE);
+                binding.constraintLayout3.setVisibility(View.VISIBLE);
+                binding.constraintLayout4.setVisibility(View.VISIBLE);
+                binding.clweekanalysis.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+
+        binding.tvviewmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AnalysisActivity.this, TestActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -201,12 +236,12 @@ public class AnalysisActivity extends AppCompatActivity {
 
         dataSet1.setBarSpacePercent(80f);
         dataSet1.setColor(getResources().getColor(R.color.new_red));
-        dataSet1.setValueTextColor(getResources().getColor(R.color.new_red));
+        dataSet1.setValueTextColor(getResources().getColor(R.color.white));
 
 
         XAxis xAxis = binding.barGraph.getXAxis();
       //  xAxis.setDrawGridLines(false);
-        xAxis.setTextColor(getResources().getColor(R.color.new_red));
+        xAxis.setTextColor(getResources().getColor(R.color.white));
         YAxis yAxis = binding.barGraph.getAxisLeft();
      //   yAxis.setDrawGridLines(false);
         yAxis.setTextColor(getResources().getColor(R.color.background));
@@ -299,7 +334,7 @@ public class AnalysisActivity extends AppCompatActivity {
         colors.add(getResources().getColor(R.color.dark_grey));
 
         dataSet.setColors(colors);
-        dataSet.setSliceSpace(2f);
+        dataSet.setSliceSpace(3f);
 
 
 
@@ -312,7 +347,7 @@ public class AnalysisActivity extends AppCompatActivity {
         Legend legend = binding.pieChart.getLegend();
         legend.setEnabled(false);
         PieData data = new PieData(dataList,dataSet);
-        binding.pieChart.animateX(1000);
+        binding.pieChart.animateX(2000);
         binding.pieChart.setData(data);
         binding.pieChart.setDescription("");
         binding.pieChart.setBackgroundColor(Color.TRANSPARENT);
@@ -339,5 +374,12 @@ public class AnalysisActivity extends AppCompatActivity {
                 then().
                 animate(fabAction4).
                 play();
+    }
+
+
+    private void animation() {
+        rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        binding.ivWorldVirus.startAnimation(rotateAnimation);
+
     }
 }
