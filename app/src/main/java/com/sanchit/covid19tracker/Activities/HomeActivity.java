@@ -205,12 +205,13 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 } else {
 
-
+                    Toast.makeText(HomeActivity.this, ""+response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CountriesResponse> call, Throwable t) {
+                Toast.makeText(HomeActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

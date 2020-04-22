@@ -3,6 +3,7 @@ package com.sanchit.covid19tracker.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.blongho.country_data.World;
 import com.eftimoff.androidplayer.Player;
 import com.eftimoff.androidplayer.actions.property.PropertyAction;
 import com.github.mikephil.charting.charts.BarChart;
@@ -27,15 +29,24 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.sanchit.covid19tracker.Adapters.CountriesAdapter;
 import com.sanchit.covid19tracker.Adapters.TestActivity;
 import com.sanchit.covid19tracker.Network.SoleInstance;
+import com.sanchit.covid19tracker.Network.WorldSoleInstance;
 import com.sanchit.covid19tracker.R;
 import com.sanchit.covid19tracker.Response.AllData.CasesTimeSeries;
 import com.sanchit.covid19tracker.Response.AllData.DataResponse;
 import com.sanchit.covid19tracker.Response.AllData.Statewise;
+import com.sanchit.covid19tracker.Response.Countries.CountriesResponse;
+import com.sanchit.covid19tracker.Response.Countries.Country;
+import com.sanchit.covid19tracker.Utils.PreferencesUtil;
 import com.sanchit.covid19tracker.databinding.ActivityAnalysisBinding;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,6 +67,11 @@ public class AnalysisActivity extends AppCompatActivity {
         context = this;
 
         fetchAllData();
+        fetchWorldData();
+
+
+
+
 
 
 
@@ -121,6 +137,115 @@ public class AnalysisActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void fetchWorldData() {
+
+        Call<CountriesResponse> call = WorldSoleInstance.getApiServiceInstance().getSummary();
+
+        call.enqueue(new Callback<CountriesResponse>() {
+            @Override
+            public void onResponse(Call<CountriesResponse> call, Response<CountriesResponse> response) {
+                if (response != null) {
+                    if (response.body() != null) {
+
+
+                        DecimalFormat formatter = new DecimalFormat("#,##,###");
+                        String conformedCases = formatter.format(response.body().getGlobal().getTotalConfirmed());
+                        String recoveredCases = formatter.format(response.body().getGlobal().getTotalRecovered());
+                        String deathcases = formatter.format(response.body().getGlobal().getTotalDeaths());
+                    //    PreferencesUtil.setTotalcases(get_value);
+
+                      //  binding.tvconfirmcount.setText(conformedCases);
+
+                        binding.tvtotalCcasesCount.setText(conformedCases);
+                        binding.tvtotalRcasesCount.setText(recoveredCases);
+
+                        binding.tvWorldconfirmcount.setText(conformedCases);
+                        binding.tvWorldrecoveredcount.setText(recoveredCases);
+                        binding.tvWorlddesecedcount.setText(deathcases);
+
+
+                        String confirm = response.body().getGlobal().getTotalConfirmed().toString();
+                        String recover = response.body().getGlobal().getTotalRecovered().toString();
+                        String death = response.body().getGlobal().getTotalDeaths().toString();
+
+
+                        setWorldPieData(confirm,recover,death);
+
+                        List<Country> countriesList = response.body().getCountries();
+                        setRecycleview(countriesList);
+
+
+                    } else {
+                       // binding.tvtoatalcases.setText(String.valueOf(PreferencesUtil.getTotalcases()));
+                    }
+                } else {
+
+                    Toast.makeText(context, ""+response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CountriesResponse> call, Throwable t) {
+                Toast.makeText(context, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setRecycleview(List<Country> countriesList) {
+        countriesList.remove(0);
+        Collections.sort(countriesList,Country::compareTo);
+        Collections.reverse(countriesList);
+        CountriesAdapter adapter = new CountriesAdapter(countriesList,context);
+        binding.rvCountries.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        binding.rvCountries.setAdapter(adapter);
+    }
+
+    private void setWorldPieData(String confirm, String recover, String death) {
+
+
+
+        ArrayList<Entry> pieValues = new ArrayList<>();
+
+        pieValues.add(new Entry(Float.parseFloat(confirm),0));
+     //   pieValues.add(new Entry(Float.parseFloat(ac),1));
+        pieValues.add(new Entry(Float.parseFloat(recover),1));
+        pieValues.add(new Entry(Float.parseFloat(death),2));
+
+
+        PieDataSet dataSet = new PieDataSet(pieValues, "");
+        dataSet.setDrawValues(false);
+
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(getResources().getColor(R.color.dark_red));
+    //    colors.add(getResources().getColor(R.color.dark_blue));
+        colors.add(getResources().getColor(R.color.dark_green));
+        colors.add(getResources().getColor(R.color.dark_grey));
+
+        dataSet.setColors(colors);
+        dataSet.setSliceSpace(3f);
+
+
+
+        ArrayList<String> dataList = new ArrayList<>();
+        dataList.add("");
+    //    dataList.add("");
+        dataList.add("");
+        dataList.add("");
+
+        Legend legend = binding.worldpiechart.getLegend();
+        legend.setEnabled(false);
+        PieData data = new PieData(dataList,dataSet);
+        binding.worldpiechart.animateX(2000);
+        binding.worldpiechart.setData(data);
+        binding.worldpiechart.setDescription("");
+        binding.worldpiechart.setBackgroundColor(Color.TRANSPARENT);
+        binding.worldpiechart.setExtraOffsets(5,10,5,5);
+        binding.worldpiechart.setDrawHoleEnabled(true);
+        binding.worldpiechart.setHoleColor(getResources().getColor(R.color.white));
+        binding.worldpiechart.invalidate();
 
     }
 
