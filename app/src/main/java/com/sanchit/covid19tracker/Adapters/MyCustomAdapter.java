@@ -63,14 +63,9 @@ public class MyCustomAdapter implements CreativePagerAdapter {
 
         View view = layoutInflater.inflate(R.layout.item_creative_header_profile, viewGroup, false);
 
-        CircleImageView imageView = (CircleImageView) view.findViewById(R.id.itemCreativeImage);
+        TextView district = (TextView) view.findViewById(R.id.tv_img);
 
-
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP)
-        {
-          //  imageView.setImageDrawable(context.getResources().getDrawable(NatureItem.values()[i].getUserDrawable()));
-            imageView.setImageResource(customePojoList.get(0).user);
-        }
+        district.setText(String.valueOf(statewiseList.get(i).getState().charAt(0)));
 
 
         return view;
@@ -88,6 +83,18 @@ public class MyCustomAdapter implements CreativePagerAdapter {
         PieChart pieChart = (PieChart) view.findViewById(R.id.pieChart);
         RecyclerView districts = (RecyclerView) view.findViewById(R.id.rv_districs);
         TextView statename = (TextView) view.findViewById(R.id.state_name);
+        TextView Stateconfirmcount = (TextView) view.findViewById(R.id.tvStateconfirmcount);
+        TextView Stateactivecount = (TextView) view.findViewById(R.id.tvStateactivecount);
+        TextView Staterecoveredcount = (TextView) view.findViewById(R.id.tvStaterecoveredcount);
+        TextView Statedesecedcount = (TextView) view.findViewById(R.id.tvStatedesecedcount);
+
+
+        Stateconfirmcount.setText(String.valueOf(statewiseList.get(i).getConfirmed()));
+        Stateactivecount.setText(String.valueOf(statewiseList.get(i).getActive()));
+        Staterecoveredcount.setText(String.valueOf(statewiseList.get(i).getRecovered()));
+        Statedesecedcount.setText(String.valueOf(statewiseList.get(i).getDeaths()));
+
+
 
         statename.setText(statewiseList.get(i).getState());
 

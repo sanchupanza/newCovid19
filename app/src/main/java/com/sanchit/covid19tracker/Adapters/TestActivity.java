@@ -6,6 +6,8 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -37,6 +39,8 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_test);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         context = this;
 
         fetchAllData();
@@ -56,6 +60,14 @@ public class TestActivity extends AppCompatActivity {
         customePojoList.add(new CustomePojo(R.drawable.user_005, 777,"Goa"));
         customePojoList.add(new CustomePojo(R.drawable.user_006, 208,"Rajasthan"));
         customePojoList.add(new CustomePojo(R.drawable.user_007, 538,"Gujarat"));
+
+
+        binding.btnBackState.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
 
