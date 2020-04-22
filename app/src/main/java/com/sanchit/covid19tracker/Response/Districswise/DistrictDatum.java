@@ -3,7 +3,7 @@ package com.sanchit.covid19tracker.Response.Districswise;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DistrictDatum {
+public class DistrictDatum  implements Comparable<DistrictDatum>{
     @SerializedName("district")
     @Expose
     private String district;
@@ -47,5 +47,10 @@ public class DistrictDatum {
 
     public void setDelta(Delta delta) {
         this.delta = delta;
+    }
+
+    @Override
+    public int compareTo(DistrictDatum districtDatum) {
+        return (this.getConfirmed().compareTo(districtDatum.getConfirmed()));
     }
 }

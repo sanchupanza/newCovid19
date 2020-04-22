@@ -7,6 +7,7 @@ public class CustomePojo {
     public int nature;
     public String stateName;
 
+
     public CustomePojo(int user, int nature, String stateName) {
         this.user = user;
         this.nature = nature;
