@@ -171,7 +171,7 @@ public class MyCustomAdapter implements CreativePagerAdapter {
 
         if(statewiseList.get(i).getState().equals("Kerala"))
         {
-            dataSet.setSliceSpace(1f);
+            dataSet.setSliceSpace(0.8f);
         }else
         {
             dataSet.setSliceSpace(1f);

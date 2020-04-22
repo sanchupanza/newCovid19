@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
+import com.blongho.country_data.World;
 import com.eftimoff.androidplayer.Player;
 import com.eftimoff.androidplayer.actions.property.PropertyAction;
 import com.sanchit.covid19tracker.Adapters.TestActivity;
@@ -75,6 +76,14 @@ public class HomeActivity extends AppCompatActivity {
         Constants.darkenBottomBar(this,R.color.white);
 
     //    Constants.darkenStatusBar(this,R.color.white);
+
+
+        World.init(context);
+
+
+        List<com.blongho.country_data.Country> list = World.getAllCountries();
+
+        int size  = list.size();
 
 
         getData();
