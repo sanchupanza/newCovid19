@@ -27,6 +27,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.google.gson.Gson;
 import com.sanchit.covid19tracker.Adapters.CountriesAdapter;
 import com.sanchit.covid19tracker.Network.SoleInstance;
 import com.sanchit.covid19tracker.Network.WorldSoleInstance;
@@ -36,9 +37,12 @@ import com.sanchit.covid19tracker.Response.AllData.DataResponse;
 import com.sanchit.covid19tracker.Response.AllData.Statewise;
 import com.sanchit.covid19tracker.Response.Countries.CountriesResponse;
 import com.sanchit.covid19tracker.Response.Countries.Country;
+
+import com.sanchit.covid19tracker.Utils.TinyDB;
 import com.sanchit.covid19tracker.databinding.ActivityAnalysisBinding;
 
 import java.text.DecimalFormat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -51,7 +55,8 @@ public class AnalysisActivity extends AppCompatActivity {
 
     private ActivityAnalysisBinding binding;
     private Context context;
-    Animation rotateAnimation;
+    private Animation rotateAnimation;
+    private TinyDB tinydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +64,10 @@ public class AnalysisActivity extends AppCompatActivity {
         binding= DataBindingUtil.setContentView(this,R.layout.activity_analysis);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         context = this;
+        tinydb = new TinyDB(context);
 
         fetchAllData();
         fetchWorldData();
-
-
 
 
 
@@ -131,7 +135,7 @@ public class AnalysisActivity extends AppCompatActivity {
             }
         });
 
-        binding.contryViewMore.setOnClickListener(view -> {startActivity(new Intent(context,CountryActivity.class));});
+        binding.contryViewMore.setOnClickListener(view -> startActivity(new Intent(context,CountryActivity.class)));
 
     }
 
@@ -170,30 +174,73 @@ public class AnalysisActivity extends AppCompatActivity {
                         setWorldPieData(confirm,recover,death);
 
                         List<Country> countriesList = response.body().getCountries();
+
+
                         setRecycleview(countriesList);
 
 
                     } else {
+
+                        setOfflineData();
                        // binding.tvtoatalcases.setText(String.valueOf(PreferencesUtil.getTotalcases()));
                     }
                 } else {
 
-                    Toast.makeText(context, ""+response.message(), Toast.LENGTH_SHORT).show();
+                    setOfflineData();
                 }
             }
 
             @Override
             public void onFailure(Call<CountriesResponse> call, Throwable t) {
-                Toast.makeText(context, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                setOfflineData();
             }
         });
+    }
+
+    private void setOfflineData() {
+        Country[] countryArray = new Gson().fromJson(tinydb.getString("cList"),Country[].class);
+        List<Country> newCountryList = new ArrayList<>();
+
+        for(Country c : countryArray)
+        {
+            newCountryList.add(c);
+        }
+
+        List<Country> smallList = new ArrayList<>();
+
+        for(int i = 0; i<5; i++)
+        {
+            smallList.add(newCountryList.get(i));
+        }
+
+        CountriesAdapter adapter = new CountriesAdapter(smallList,context);
+        binding.rvCountries.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        binding.rvCountries.setAdapter(adapter);
+
+
     }
 
     private void setRecycleview(List<Country> countriesList) {
         countriesList.remove(0);
         Collections.sort(countriesList,Country::compareTo);
         Collections.reverse(countriesList);
-        CountriesAdapter adapter = new CountriesAdapter(countriesList,context);
+
+        List<Country> smallList = new ArrayList<>();
+
+        for(int i = 0; i<5; i++)
+        {
+            smallList.add(countriesList.get(i));
+        }
+
+
+        tinydb.putString("cList",new Gson().toJson(countriesList));
+    /*    tinydb.putString("tc",formatter.format(response.body().getGlobal().getTotalConfirmed()));
+        tinydb.putString("nc",formatter.format(response.body().getGlobal().getNewConfirmed()));
+        tinydb.putString("tr",formatter.format(response.body().getGlobal().getTotalRecovered()));
+        tinydb.putString("nr",formatter.format(response.body().getGlobal().getNewRecovered()));
+        tinydb.putString("td",formatter.format(response.body().getGlobal().getTotalDeaths()));
+        tinydb.putString("nd",formatter.format(response.body().getGlobal().getNewDeaths()));*/
+        CountriesAdapter adapter = new CountriesAdapter(smallList,context);
         binding.rvCountries.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         binding.rvCountries.setAdapter(adapter);
     }

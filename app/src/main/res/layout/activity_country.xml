@@ -10,18 +10,21 @@
         android:layout_height="match_parent"
         android:background="@color/pink">
 
-        <androidx.appcompat.widget.SearchView
+        <SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:queryHint="Search Country"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
+            app:iconifiedByDefault="false"
+            android:clickable="true"
             android:layout_marginEnd="20dp"
             android:background="@drawable/search_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_back_country">
-        </androidx.appcompat.widget.SearchView>
+        </SearchView>
 
 
         <TextView
@@ -52,6 +55,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvcountry"
             android:layout_width="0dp"
+            app:spanCount="3"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/country_detailed_item"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
