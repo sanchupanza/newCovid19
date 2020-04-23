@@ -65,7 +65,7 @@ public class MyCustomAdapter implements CreativePagerAdapter {
 
         TextView district = (TextView) view.findViewById(R.id.tv_img);
 
-        district.setText(String.valueOf(statewiseList.get(i).getState().charAt(0)));
+        district.setText(String.valueOf(statewiseList.get(i).getStatecode()));
 
 
         return view;
