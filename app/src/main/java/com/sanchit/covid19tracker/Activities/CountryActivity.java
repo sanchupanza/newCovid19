@@ -60,10 +60,8 @@ public class CountryActivity extends AppCompatActivity implements SearchView.OnQ
 
             List<Country> temp = new ArrayList<>();
 
-            for(Country c : newCountryList)
-            {
-                if(c.getCountry().toLowerCase().contains(text.toLowerCase()))
-                {
+            for (Country c : newCountryList) {
+                if (c.getCountry().toLowerCase().contains(text.toLowerCase())) {
                     temp.add(c);
                 }
             }

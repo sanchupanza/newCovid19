@@ -29,6 +29,9 @@ import com.sanchit.covid19tracker.Adapters.UpdateAdapter;
 import com.sanchit.covid19tracker.Network.SoleInstance;
 import com.sanchit.covid19tracker.Network.WorldSoleInstance;
 import com.sanchit.covid19tracker.R;
+import com.sanchit.covid19tracker.Response.AllData.CasesTimeSeries;
+import com.sanchit.covid19tracker.Response.AllData.DataResponse;
+import com.sanchit.covid19tracker.Response.AllData.Statewise;
 import com.sanchit.covid19tracker.Response.Countries.CountriesResponse;
 import com.sanchit.covid19tracker.Response.Updates.UpdatesResponse;
 import com.sanchit.covid19tracker.Utils.Constants;
@@ -36,6 +39,7 @@ import com.sanchit.covid19tracker.Utils.PreferencesUtil;
 import com.sanchit.covid19tracker.databinding.ActivityHomeBinding;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -83,7 +87,8 @@ public class HomeActivity extends AppCompatActivity {
         int size  = list.size();
 
 
-        getData();
+     //   getData();
+        getIndiadata();
         animatesample(binding.iamge1, binding.iamge2, binding.btnCovidResources,binding.btnStatsAnalysis,binding.btnInformation,binding.btnEmergencyContacts, binding.iamge4);
         animation();
         getUpdates();
@@ -99,6 +104,83 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void getIndiadata() {
+
+
+
+        Call<DataResponse> call = SoleInstance.getApiServiceInstance().getAllData();
+
+        call.enqueue(new Callback<DataResponse>() {
+            @Override
+            public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
+
+                if (response != null) {
+                    if (response.body() != null) {
+
+
+                        DecimalFormat formatter = new DecimalFormat("#,##,###");
+                        String get_value = formatter.format(Integer.parseInt(response.body().getStatewise().get(0).getConfirmed()));
+                        PreferencesUtil.setTotalcases(get_value);
+                        binding.tvtoatalcases.setText(String.valueOf(PreferencesUtil.getTotalcases()));
+
+             /*           String lastUpdateTime  = response.body().getStatewise().get(0).getLastupdatedtime().trim();
+
+                        //   binding.textView2.setText("LAST UPDATED "+ Constants.getTimesAgo(lastUpdateTime).toUpperCase()+", "+lastUpdateTime);
+
+                        String confirmed = (String.valueOf(response.body().getStatewise().get(0).getConfirmed()));
+                        String active = (String.valueOf(response.body().getStatewise().get(0).getActive()));
+                        String recovered = (String.valueOf(response.body().getStatewise().get(0).getRecovered()));
+                        String death = (String.valueOf(response.body().getStatewise().get(0).getDeaths()));
+
+                        setPieData(confirmed,active,recovered,death);
+
+                        List<Statewise> statewiseList = response.body().getStatewise();
+                        setStatesData(statewiseList);
+
+
+                        List<CasesTimeSeries> graphlist = new ArrayList<>();
+
+                        graphlist = response.body().getCasesTimeSeries();
+                        setBarGraph(graphlist);*/
+
+/*
+                        binding.tvCDelCount.setText("+" + response.body().getStatewise().get(0).getDeltaconfirmed());
+                        //     binding.tvADelCount.setText("[+"+ response.body().getStatewise().get(0).getDelta().getActive() +"]");
+                        binding.tvRDelCount.setText("+" + response.body().getStatewise().get(0).getDeltarecovered());
+                        binding.tvDDelCount.setText("+" + response.body().getStatewise().get(0).getDeltadeaths());
+
+                        statewiseList = response.body().getStatewise();
+                        setStatesData(statewiseList);
+                        statewiseList.remove(0);
+                        adapter = new StatewiseDataAdapter(statewiseList, context);
+                        binding.rvStatewise.setAdapter(adapter);
+                        binding.recyclerView.setItemViewCacheSize(statewiseList.size());
+
+                        List<CasesTimeSeries> list = response.body().getCasesTimeSeries();
+                        Collections.reverse(list);
+                        dateList = list;
+                        dateWiseAdapter = new DateWiseAdapter(list, context);
+                        binding.recyclerView.setAdapter(dateWiseAdapter);
+                        binding.recyclerView.setItemViewCacheSize(list.size());
+                        // binding.recyclerView.scrollToPosition((response.body().getCasesTimeSeries().size()-1));*/
+
+
+                    } else {
+                        binding.tvtoatalcases.setText(String.valueOf(PreferencesUtil.getTotalcases()));
+                    }
+                } else {
+                    binding.tvtoatalcases.setText(String.valueOf(PreferencesUtil.getTotalcases()));
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<DataResponse> call, Throwable t) {
+                binding.tvtoatalcases.setText(String.valueOf(PreferencesUtil.getTotalcases()));
+            }
+        });
     }
 
     private void getUpdates() {
