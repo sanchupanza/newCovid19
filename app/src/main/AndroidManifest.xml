@@ -16,12 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Adapters.TestActivity">
-
-        </activity>
-        <activity android:name=".Activities.SateDetailActivity">
-
-        </activity>
+        <activity android:name=".Activities.CountryActivity"></activity>
+        <activity android:name=".Activities.SateActivity"></activity>
         <activity android:name=".Activities.AnalysisActivity" />
         <activity android:name=".Activities.HomeActivity">
             <intent-filter>

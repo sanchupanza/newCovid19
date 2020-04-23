@@ -5,9 +5,14 @@
     tools:context=".Activities.HomeActivity">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
 
@@ -15,10 +20,11 @@
             android:id="@+id/iamge1"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/logobanner_rect"
             app:layout_constraintBottom_toTopOf="@+id/iamge2"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="10dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imageView7"
@@ -233,6 +239,8 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 
 

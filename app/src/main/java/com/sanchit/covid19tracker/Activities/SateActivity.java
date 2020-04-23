@@ -1,4 +1,4 @@
-package com.sanchit.covid19tracker.Adapters;
+package com.sanchit.covid19tracker.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
+import com.sanchit.covid19tracker.Adapters.CustomePojo;
+import com.sanchit.covid19tracker.Adapters.MyCustomAdapter;
 import com.sanchit.covid19tracker.Network.SoleInstance;
 import com.sanchit.covid19tracker.R;
 import com.sanchit.covid19tracker.Response.AllData.CasesTimeSeries;
@@ -28,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TestActivity extends AppCompatActivity {
+public class SateActivity extends AppCompatActivity {
 
     private ActivityTestBinding binding;
     private Context context;

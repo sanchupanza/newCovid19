@@ -47,7 +47,9 @@
                 android:text="District Name"
                 android:textColor="@color/pink"
                 android:textSize="18sp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold">
+
+            </TextView>
 
             <TextView
 

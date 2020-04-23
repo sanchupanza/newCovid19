@@ -49,7 +49,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
         {
             int flag = World.getFlagOf("United States".toLowerCase());
             holder.binding.flag.setImageResource(flag);
-            holder.binding.countryName.setText("United States");
+            holder.binding.countryName.setText("USA");
         }else
         if(countriesList.get(position).getCountry().trim().equals("Iran, Islamic Republic of"))
         {

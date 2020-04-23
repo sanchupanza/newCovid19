@@ -16,10 +16,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
-import com.blongho.country_data.World;
 import com.eftimoff.androidplayer.Player;
 import com.eftimoff.androidplayer.actions.property.PropertyAction;
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -30,7 +28,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.sanchit.covid19tracker.Adapters.CountriesAdapter;
-import com.sanchit.covid19tracker.Adapters.TestActivity;
 import com.sanchit.covid19tracker.Network.SoleInstance;
 import com.sanchit.covid19tracker.Network.WorldSoleInstance;
 import com.sanchit.covid19tracker.R;
@@ -39,13 +36,10 @@ import com.sanchit.covid19tracker.Response.AllData.DataResponse;
 import com.sanchit.covid19tracker.Response.AllData.Statewise;
 import com.sanchit.covid19tracker.Response.Countries.CountriesResponse;
 import com.sanchit.covid19tracker.Response.Countries.Country;
-import com.sanchit.covid19tracker.Utils.PreferencesUtil;
 import com.sanchit.covid19tracker.databinding.ActivityAnalysisBinding;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -132,11 +126,12 @@ public class AnalysisActivity extends AppCompatActivity {
         binding.tvviewmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AnalysisActivity.this, TestActivity.class);
+                Intent intent = new Intent(AnalysisActivity.this, SateActivity.class);
                 startActivity(intent);
             }
         });
 
+        binding.contryViewMore.setOnClickListener(view -> {startActivity(new Intent(context,CountryActivity.class));});
 
     }
 
