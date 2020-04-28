@@ -55,18 +55,18 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvcountry"
             android:layout_width="0dp"
-            app:spanCount="3"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/country_detailed_item"
             android:layout_height="0dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView" />
+            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            app:spanCount="3"
+            tools:listitem="@layout/country_detailed_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

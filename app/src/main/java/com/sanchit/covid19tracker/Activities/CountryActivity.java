@@ -5,9 +5,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.sanchit.covid19tracker.Adapters.AllCountriesAdapter;
@@ -34,6 +37,14 @@ public class CountryActivity extends AppCompatActivity implements SearchView.OnQ
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         context = this;
         tinyDB = new TinyDB(context);
+        SearchView searchView= (SearchView) findViewById(R.id.searchView);
+        int id = searchView.getContext()
+                .getResources()
+                .getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = (TextView) searchView.findViewById(id);
+        textView.setTextColor(Color.WHITE);
+        textView.setHintTextColor(Color.WHITE);
+
 
         Country[] countryArray = new Gson().fromJson(tinyDB.getString("cList"),Country[].class);
         List<Country> newCountryList = new ArrayList<>();
@@ -42,6 +53,9 @@ public class CountryActivity extends AppCompatActivity implements SearchView.OnQ
         {
             newCountryList.add(c);
         }
+
+
+
 
         binding.rvcountry.setLayoutManager(new GridLayoutManager(this,3));
         AllCountriesAdapter adapter = new AllCountriesAdapter(context,newCountryList);

@@ -89,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
 
      //   getData();
         getIndiadata();
-        animatesample(binding.iamge1, binding.iamge2, binding.btnCovidResources,binding.btnStatsAnalysis,binding.btnInformation,binding.btnEmergencyContacts, binding.iamge4);
+        animatesample(binding.iamge1, binding.iamge2,binding.iamge3, binding.iamge4);
         animation();
         getUpdates();
 
@@ -101,6 +101,8 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.btnCovidResources.setOnClickListener(view -> startActivity(new Intent(context,ResourcesActivity.class)));
 
 
 
@@ -245,28 +247,25 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void animatesample(ConstraintLayout iamge1, ConstraintLayout iamge2, Button btnCovidResources, Button btnStatsAnalysis, Button btnInformation, Button btnEmergencyContacts, LinearLayout iamge4) {
+    private void animatesample(ConstraintLayout iamge1, ConstraintLayout iamge2, LinearLayout image3, LinearLayout iamge4) {
 
-        final PropertyAction fabAction = PropertyAction.newPropertyAction(iamge2).scaleX(0).scaleY(0).duration(750).interpolator(new AccelerateDecelerateInterpolator()).build();
-        final PropertyAction headerAction = PropertyAction.newPropertyAction(iamge1).interpolator(new DecelerateInterpolator()).translationY(-200).duration(550).alpha(0.4f).build();
-        final PropertyAction fabAction1 = PropertyAction.newPropertyAction(btnCovidResources).scaleX(0).scaleY(0).duration(400).interpolator(new AccelerateDecelerateInterpolator()).build();
-        final PropertyAction fabAction2 = PropertyAction.newPropertyAction(btnStatsAnalysis).scaleX(0).scaleY(0).duration(400).interpolator(new AccelerateDecelerateInterpolator()).build();
-        final PropertyAction fabAction3 = PropertyAction.newPropertyAction(btnInformation).scaleX(0).scaleY(0).duration(400).interpolator(new AccelerateDecelerateInterpolator()).build();
-        final PropertyAction fabAction4 = PropertyAction.newPropertyAction(btnEmergencyContacts).scaleX(0).scaleY(0).duration(400).interpolator(new AccelerateDecelerateInterpolator()).build();
+//        final PropertyAction fabAction = PropertyAction.newPropertyAction(iamge2).scaleX(0).scaleY(0).duration(750).interpolator(new AccelerateDecelerateInterpolator()).build();
+//        final PropertyAction headerAction = PropertyAction.newPropertyAction(iamge1).interpolator(new DecelerateInterpolator()).translationY(-200).duration(550).alpha(0.4f).build();
+//        final PropertyAction fabAction1 = PropertyAction.newPropertyAction(image3).scaleX(0).scaleY(0).duration(400).interpolator(new AccelerateDecelerateInterpolator()).build();
+//        final PropertyAction bottomAction2 = PropertyAction.newPropertyAction(iamge4).translationY(500).duration(750).alpha(0f).build();
+
+
+        final PropertyAction fabAction = PropertyAction.newPropertyAction(iamge1).translationY(500).duration(750).alpha(0f).build();
+        final PropertyAction headerAction = PropertyAction.newPropertyAction(iamge2).translationY(500).duration(750).alpha(0f).build();
+        final PropertyAction fabAction1 = PropertyAction.newPropertyAction(image3).translationY(500).duration(750).alpha(0f).build();
         final PropertyAction bottomAction2 = PropertyAction.newPropertyAction(iamge4).translationY(500).duration(750).alpha(0f).build();
 
         Player.init().
-                animate(headerAction).
-                then().
                 animate(fabAction).
                 then().
+                animate(headerAction).
+                then().
                 animate(fabAction1).
-                then().
-                animate(fabAction2).
-                then().
-                animate(fabAction3).
-                then().
-                animate(fabAction4).
                 then().
                 animate(bottomAction2).
                 play();

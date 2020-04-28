@@ -5,10 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <LinearLayout
 
-    android:layout_width="130dp"
-    android:layout_height="170dp"
-
-    android:orientation="vertical">
+    android:layout_width="120dp"
+    android:layout_height="160dp"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:layout_marginTop="10dp"
                 android:text="India"
                 android:textColor="#01183E"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,14 +51,16 @@
                 android:id="@+id/tvcountrytotalconfirmed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:text="1000000000"
                 android:textColor="@color/pink"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tvcountrytotaldeath"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/countryName" />
 
             <TextView
                 android:id="@+id/tvcountrytotaldeath"
