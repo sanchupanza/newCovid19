@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -16,15 +18,19 @@ import com.sanchit.covid19tracker.databinding.ActivityResourcesBinding;
 public class ResourcesActivity extends AppCompatActivity {
 
     ActivityResourcesBinding binding;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_resources);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        context= this;
 
 
         binding.btnBackResources.setOnClickListener(view -> finish());
+
+        binding.layoutHome.setOnClickListener(view -> startActivity(new Intent(context,ResourcesDetailActivity.class)));
 
         //animate(binding.layoutHome,binding.layoutDelivery,binding.layoutTestingLab,binding.layoutFundRaisor,binding.layoutFreeFood,binding.layoutGovernmentHelpline,binding.layoutmentalsupport);
     }
